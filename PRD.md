@@ -258,6 +258,26 @@ The Fitness Community Marketplace Platform is a B2C2B SaaS solution that consoli
 
 ---
 
+#### US-ORG-007: Leaderboard Management
+**As a** community organizer  
+**I want to** configure and manage leaderboards for my community  
+**So that** I can gamify engagement and motivate members
+
+**Acceptance Criteria:**
+- Organizer can enable/disable leaderboard for their community
+- Organizer can configure which metrics are used for rankings (events, check-ins, points, etc.)
+- Organizer can set point values for different activities (attendance, posts, check-ins)
+- Organizer can set leaderboard reset frequency (daily, weekly, monthly, never)
+- Organizer can configure privacy settings (public, members-only, private)
+- Organizer can view leaderboard analytics (views, engagement impact)
+- Organizer can export leaderboard data (CSV, PDF)
+- Organizer can manually adjust scores with audit trail
+- Organizer can moderate leaderboard entries (remove inappropriate content)
+
+**Priority:** P1 (High)
+
+---
+
 ### 4.2 Member User Stories
 
 #### US-MEM-001: Community Discovery
@@ -335,6 +355,26 @@ The Fitness Community Marketplace Platform is a B2C2B SaaS solution that consoli
 - Member can react to and comment on posts
 - Member can message other members and organizers
 - Member can leave reviews and ratings for communities
+
+**Priority:** P1 (High)
+
+---
+
+#### US-MEM-006: Leaderboard Participation
+**As a** community member  
+**I want to** view my ranking on local and global leaderboards  
+**So that** I can compete with others and track my progress
+
+**Acceptance Criteria:**
+- Member can view local leaderboard (within their community) showing top performers
+- Member can view global leaderboard (across all communities) showing top performers
+- Member can see their current rank and position on both leaderboards
+- Member can filter leaderboards by time period (daily, weekly, monthly, all-time)
+- Member can filter leaderboards by activity type (running, yoga, cycling, etc.)
+- Member can view leaderboard rankings based on multiple metrics (events attended, check-ins, points, distance, etc.)
+- Member can see badges and achievements for top positions
+- Member receives notifications when they move up in rankings
+- Member can opt-out of leaderboard visibility if desired
 
 **Priority:** P1 (High)
 
@@ -557,7 +597,189 @@ Social features to foster community connection and engagement.
 
 ---
 
-#### 5.1.7 Analytics and Reporting
+#### 5.1.7 Leaderboard System
+
+**Feature:** Local and Global Leaderboards
+
+**Description:**
+Comprehensive leaderboard system that enables members to compete and track their performance both within their local community and across the global platform. The system promotes engagement, healthy competition, and community building through gamification.
+
+**Functional Requirements:**
+
+**Local Leaderboards (Community-Specific):**
+- Display top performers within a specific community
+- Show rankings based on community-specific metrics:
+  - Events attended (total count, consecutive attendance)
+  - Check-ins completed
+  - Points earned through participation
+  - Activity-specific metrics (distance run, classes completed, etc.)
+  - Community contributions (posts, comments, photos shared)
+- Organizer-configurable leaderboard settings:
+  - Enable/disable leaderboard for community
+  - Select which metrics to display
+  - Set leaderboard reset frequency (daily, weekly, monthly, never)
+  - Configure privacy settings (public, members-only, private)
+- Display top 10-100 members based on community size
+- Show user's current rank and position
+- Highlight top 3 positions with special badges (Gold, Silver, Bronze)
+- Display rank changes (up/down arrows, position change indicators)
+- Time period filters: Daily, Weekly, Monthly, All-Time
+- Activity type filters (if community supports multiple activities)
+
+**Global Leaderboards (Platform-Wide):**
+- Display top performers across all communities on the platform
+- Show rankings based on aggregated metrics:
+  - Total events attended across all communities
+  - Total check-ins across all communities
+  - Total points earned platform-wide
+  - Cross-community activity metrics
+  - Overall engagement score
+- Category-based global leaderboards:
+  - By activity type (Running, Yoga, Cycling, CrossFit, etc.)
+  - By geographic region (City, State, Country, Global)
+  - By community type (Running Clubs, Yoga Studios, Sports Leagues, etc.)
+- Display top 100-1000 performers globally
+- Show user's current rank and percentile
+- Highlight top 10 positions with special recognition
+- Time period filters: Daily, Weekly, Monthly, Quarterly, All-Time
+- Activity type filters
+- Geographic filters (optional)
+
+**Scoring and Ranking System:**
+- **Points System:**
+  - Event attendance: 10 points per event
+  - Event check-in: 5 points per check-in
+  - Community post: 3 points per post
+  - Comment/Reaction: 1 point per interaction
+  - Photo/Video share: 5 points per media upload
+  - Streak bonus: 2x points for consecutive attendance
+  - Organizer-configurable point values
+- **Activity-Specific Metrics:**
+  - Running: Total distance, average pace, longest run
+  - Yoga: Classes attended, total hours, consecutive days
+  - Cycling: Total distance, elevation gain, rides completed
+  - CrossFit: Workouts completed, PRs achieved, attendance rate
+- **Ranking Algorithm:**
+  - Primary sort: Total points or selected metric
+  - Secondary sort: Most recent activity (for tie-breaking)
+  - Tertiary sort: User ID (deterministic tie-breaking)
+  - Real-time updates with caching for performance
+
+**Privacy and Opt-Out:**
+- Members can opt-out of leaderboard visibility
+- Opted-out members still earn points but don't appear on public leaderboards
+- Organizers can view all member data regardless of opt-out status
+- Privacy settings: Public, Community-Only, Private
+- GDPR-compliant data handling
+
+**Badges and Achievements:**
+- **Position Badges:**
+  - 🥇 Gold badge for #1 position
+  - 🥈 Silver badge for #2 position
+  - 🥉 Bronze badge for #3 position
+  - Top 10 badge for positions 4-10
+  - Top 100 badge for positions 11-100
+- **Achievement Badges:**
+  - First Event badge
+  - 10 Events badge
+  - 50 Events badge
+  - 100 Events badge
+  - Perfect Attendance (monthly)
+  - Streak Master (7-day, 30-day, 100-day streaks)
+  - Community Champion (top contributor)
+  - Global Elite (top 1% globally)
+- Badges displayed on user profiles and leaderboard entries
+
+**Notifications:**
+- Rank change notifications (when user moves up in rankings)
+- Achievement unlock notifications
+- Weekly leaderboard summary emails (opt-in)
+- Milestone notifications (entering top 10, top 100, etc.)
+
+**UI/UX Requirements:**
+- **Leaderboard Display:**
+  - Clean, scannable table/list format
+  - User avatars and names for top positions
+  - Highlight current user's position with distinct styling
+  - Smooth scrolling with pagination or infinite scroll
+  - Quick filter chips for time period and activity type
+  - Search functionality to find specific users
+  - Export to CSV option (for organizers)
+- **Visual Design:**
+  - Medal icons for top 3 positions
+  - Progress bars showing points/metrics
+  - Rank change indicators (↑↓ arrows)
+  - Color-coded tiers (top 10, top 100, etc.)
+  - Responsive design for mobile and desktop
+  - Dark mode support
+- **User Experience:**
+  - One-click toggle between local and global leaderboards
+  - Quick access from community page and user profile
+  - Real-time updates (with 5-minute cache for performance)
+  - Loading states and skeleton screens
+  - Empty states with helpful messaging
+  - Tooltips explaining scoring system
+
+**Technical Requirements:**
+- **Data Storage:**
+  - Leaderboard scores stored in Redis for fast access
+  - Historical data stored in PostgreSQL for analytics
+  - Daily/weekly/monthly snapshots for historical rankings
+- **Performance:**
+  - Cached leaderboard calculations (5-minute TTL)
+  - Incremental score updates (not full recalculations)
+  - Pagination for large leaderboards (50 entries per page)
+  - Lazy loading for leaderboard entries
+- **Computation:**
+  - Background job processing for score calculations
+  - Scheduled jobs for leaderboard resets (daily/weekly/monthly)
+  - Real-time score updates via event-driven architecture
+  - Batch processing for historical leaderboard generation
+- **APIs:**
+  - RESTful API endpoints:
+    - `GET /api/v1/communities/{id}/leaderboard` - Local leaderboard
+    - `GET /api/v1/leaderboards/global` - Global leaderboard
+    - `GET /api/v1/leaderboards/{type}` - Category-specific leaderboard
+    - `GET /api/v1/users/{id}/leaderboard-position` - User's position
+    - `POST /api/v1/users/{id}/leaderboard-opt-out` - Opt-out toggle
+  - WebSocket support for real-time rank updates (optional)
+- **Analytics:**
+  - Track leaderboard views and engagement
+  - Monitor rank change frequency
+  - Measure impact on user retention and activity
+  - A/B testing capabilities for scoring algorithms
+
+**Integration Points:**
+- Event attendance system (for attendance-based scoring)
+- Check-in system (for check-in points)
+- Social features (for contribution points)
+- Activity tracking (for activity-specific metrics)
+- Notification system (for rank change alerts)
+- Analytics dashboard (for organizer insights)
+
+**Organizer Controls:**
+- Enable/disable leaderboard for community
+- Configure scoring weights and point values
+- Set leaderboard reset schedule
+- View leaderboard analytics and engagement metrics
+- Export leaderboard data
+- Manually adjust scores (with audit trail)
+- Moderate leaderboard entries (remove inappropriate content)
+
+**Future Enhancements:**
+- Team/group leaderboards (for team-based communities)
+- Seasonal leaderboards (summer challenge, winter challenge, etc.)
+- Custom leaderboards (organizer-created with custom rules)
+- Leaderboard challenges (time-limited competitions)
+- Social sharing of leaderboard positions
+- Integration with fitness tracking devices (Strava, Garmin, etc.)
+
+**Priority:** P1 (High)  
+**Target Release:** Phase 2 (Months 7-12)
+
+---
+
+#### 5.1.8 Analytics and Reporting
 
 **Feature:** Data Analytics Dashboard
 
@@ -817,6 +1039,10 @@ Integrated merchandise creation and sales platform.
 - Events created per month
 - RSVPs per event (average)
 - Member retention rate (30-day, 90-day, 180-day)
+- Leaderboard views per month
+- Leaderboard participation rate (% of members who appear on leaderboards)
+- Average leaderboard rank changes per user per month
+- Badge/achievement unlock rate
 
 **Revenue:**
 - Gross Merchandise Value (GMV)
@@ -880,6 +1106,7 @@ Integrated merchandise creation and sales platform.
 **Additional Features:**
 - Advanced event management (recurring events, waitlists)
 - Social features (messaging, feed, leaderboards)
+- Local and global leaderboard system with badges and achievements
 - Mobile applications (iOS and Android)
 - Premium subscription tier
 - Advanced analytics
@@ -890,6 +1117,9 @@ Integrated merchandise creation and sales platform.
 - 100,000 members
 - $1M monthly GMV
 - 20% premium subscription conversion
+- 60%+ of communities enable leaderboards
+- 40%+ of members participate in leaderboards
+- 25%+ increase in member engagement (attributed to leaderboards)
 
 ---
 
